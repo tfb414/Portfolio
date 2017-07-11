@@ -1,79 +1,23 @@
 # Project Title
 
-This is a pygame that was started within the first week of starting my DigitalCrafts bootcamp. It utilizes object oriented programming.
-
-```
-Give examples
-```
+This is a pygame that was started within the first week of starting my DigitalCrafts bootcamp. It utilizes python and object oriented programming fundamentals.
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+To run this pygame please make sure that python is installed locally on your computer. Clone or download the python file and navigate to the correct directory. Execute the file via command line by typing python blockyblocks.py to initialize it.
 
-Say what the step will be
+### Game Mechanics
 
-```
-Give the example
-```
+This game in it’s current form is a simple avoidance game. You as the main block are supposed to avoid the yellow blocks as they come across the screen.
 
-And repeat
+### Future Additions
 
-```
-until finished 
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+I plan to add a menu, difficulty increase, and a scoring mechanic.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+* [Python 2.7.13] https://www.python.org/downloads/
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* **Tim Brady**
