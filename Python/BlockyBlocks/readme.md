@@ -1,4 +1,4 @@
-# Project Title
+# BlockyBlocks
 
 This is a pygame that was started within the first week of starting my DigitalCrafts bootcamp. It utilizes python and object oriented programming fundamentals.
 
