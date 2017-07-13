@@ -10,14 +10,18 @@ def main():
     height = 480
     color = (97, 159, 182)
     wall_color = (255,255,0)
-    number_of_blocks = 20
+    number_of_blocks = 1
+    score_count = 0
 
     pygame.init()
+    myfont = pygame.font.SysFont("monospace", 30)
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('My Game')
     clock = pygame.time.Clock()
 
-    class Manage_blocks(pygame.sprite.Sprite):
+
+
+    class Block(pygame.sprite.Sprite):
         def __init__(self):
             pygame.sprite.Sprite.__init__(self)
             self.xloc = width
@@ -45,7 +49,9 @@ def main():
             
         def spawn(self, number_of_blocks):
             for i in range(number_of_blocks):
-                self.blocks_array.append(Manage_blocks())
+                self.blocks_array.append(Block())
+                
+            
     
     class Hero(pygame.sprite.Sprite):
         def __init__(self):
@@ -66,37 +72,65 @@ def main():
             if pressed[pygame.K_LEFT] and self.xloc >= 0: self.xloc -= 5
             if pressed[pygame.K_RIGHT] and self.xloc <= (width - self.width): self.xloc += 5
     
+    def collision_detection(number_of_blocks, all_blocks):
+        block_locations = []
+        collision = False
+        for i in range(number_of_blocks):
+            block_locations.append(all_blocks.blocks_array[i].rect)
+            if(block_locations[i].colliderect(hero.rect)):
+                collision = True
+        return collision
+
+    def block_mover(number_of_blocks, all_blocks):
+        for block in all_blocks.blocks_array:
+            block.make_and_move()
+        
+    def has_collided(collision):
+        if collision == True:
+            color = (255, 100, 0)
+        if collision == False:
+            color = (97, 159, 182)
+        return color
+
+    def show_score(score_count):
+        score_count = str(int(score_count) + 1)
+        score = myfont.render(score_count, 1, (255,0,0))
+        screen.blit(score, (200, 15))
+        return score_count
+
+    def difficulty(score_count, all_blocks, number_of_blocks):
+        if (int(score_count) % 100 == 0):
+            all_blocks.spawn(1)
+            number_of_blocks = number_of_blocks + 1
+        return number_of_blocks
+
+    
     all_blocks = Create_blocks()
     all_blocks.spawn(number_of_blocks)
     hero = Hero()
     stop_game = False
+    
+    
     while not stop_game:
         for event in pygame.event.get():
-
-            # Event handling
-
             if event.type == pygame.QUIT:
                 stop_game = True
 
         screen.fill((50,50,50))
-        
-        
 
-        # Game logic
-        
         hero.move()
-        block_locations = []
-        hero_location = hero.rect
-        collide = False
-        for i in range(number_of_blocks):
-            all_blocks.blocks_array[i].make_and_move()
-            block_locations.append(all_blocks.blocks_array[i].rect)
-            if(block_locations[i].colliderect(hero_location)):
-                collide = True
-        if collide == True:
-            color = (255, 100, 0)
-        if collide == False:
-            color = (97, 159, 182)
+        number_of_blocks = difficulty(score_count, all_blocks, number_of_blocks)
+        collision = collision_detection(number_of_blocks, all_blocks)
+        # print collision
+        # color = has_collided(collision)
+        stop_game = collision
+        block_mover(number_of_blocks, all_blocks)
+        score_count = show_score(score_count)
+
+        # difficulty(score_count)
+        
+        
+        
         
         pygame.display.update()
         clock.tick(60)
@@ -105,3 +139,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+# function for moving, color, and collision detection
+# Collision detection not working for any but the first block
