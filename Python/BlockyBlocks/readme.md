@@ -28,3 +28,6 @@ This game in it’s current form is a simple avoidance game. You as the main blo
 ## Authors
 
 * **Tim Brady**
+
+## Contributors
+ * **Ya boi Carl!**
