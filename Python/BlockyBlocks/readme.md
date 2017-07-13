@@ -12,9 +12,11 @@ This game in it’s current form is a simple avoidance game. You as the main blo
 
 ### Future Additions
 
+~~test~~
+
     *Menu
-    *~~Additional blocks being added over time~~ 7/13/17
-    *~~Scoring mechanic~~ 7/13/17
+    * ~~Additional blocks being added over time~~ 7/13/17
+    * ~~Scoring mechanic~~ 7/13/17
     *Different colors or images for items with different speeds
     *Images instead of blocks
     *Better overall visuals
