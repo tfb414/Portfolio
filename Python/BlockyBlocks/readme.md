@@ -29,5 +29,6 @@ This game in it’s current form is a simple avoidance game. You as the main blo
 
 * **Tim Brady**
 
-## Contributors
- * **Ya boi Carl!**
+## Acknowledgements
+ * **Chris Aquino**
+ * [**Ya boi Carl!**] https://github.com/mutebard
