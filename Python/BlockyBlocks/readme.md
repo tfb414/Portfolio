@@ -13,12 +13,14 @@ This game in it’s current form is a simple avoidance game. You as the main blo
 ### Future Additions
 
 - [ ] Menu
+- [x] Title screen (7/16/17)
 - [x] Additional blocks being added over time (7/13/17)
 - [x] Scoring mechanic (7/13/17)
 - [ ] Different colors or images for items with different speeds
 - [ ] Images instead of blocks
 - [ ] Better overall visuals
 - [ ] Clean up codebase
+- [x] Refactor the code into classes
 
 ## Built With
 
