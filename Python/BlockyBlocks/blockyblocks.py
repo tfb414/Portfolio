@@ -6,32 +6,111 @@ import random
 
 
 def main():
-    width = 512
-    height = 480
-    color = (97, 159, 182)
-    wall_color = (255,255,0)
-    number_of_blocks = 1
-    score_count = 0
+    class Game_world(object):
+        def __init__(self):
+            self.width = 512
+            self.height = 480
+            self.screen = pygame.display.set_mode((self.width, self.height))
+            self.score_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", 15)
+            self.font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", 55)
+            self.game_setup = pygame.display.set_caption('BlockyBlocks')
+            self.clock = pygame.time.Clock()
+            self.color = (77,137,7)
+            self.wall_color = (40,37,41)
+            self.number_of_blocks = 1
+            self.score_count = 1
+            self.quit = False
+            
 
+        def block_mover(self, number_of_blocks, array_of_blocks):
+            for block in array_of_blocks.blocks_array:
+                block.make_and_move()
+
+        def collision_detection(self, number_of_blocks, array_of_blocks):
+            block_locations = []
+            collision = False
+            for i in range(number_of_blocks):
+                block_locations.append(array_of_blocks.blocks_array[i].rect)
+                if(block_locations[i].colliderect(self.hero.rect)):
+                    collision = True
+            return collision
+        # def has_collided(self, collision):
+        #     if collision == True:
+        #         game_world.color = (255, 100, 0)
+        #     if collision == False:
+        #         game_world.color = (97, 159, 182)
+        #     return game_world.color
+        def show_score(self, score_count):
+            score_count = str(int(score_count) + 1)
+            score = game_world.font.render(score_count, 1, (255,0,0))
+            score_rect = score.get_rect(center=(game_world.width/2, 40))
+            game_world.screen.blit(score, score_rect)
+            return score_count
+
+        def difficulty(self, score_count, array_of_blocks, number_of_blocks):
+            if (int(score_count) % 100 == 0):
+                array_of_blocks.spawn(1)
+                number_of_blocks = number_of_blocks + 1
+            return number_of_blocks
+        
+        def menu_text(self):
+            menu = game_world.font.render("Blocky Blocks", 1, (255,0,0))
+            menu_rect = menu.get_rect(center=(game_world.width/2, 100))
+            game_world.screen.blit(menu,menu_rect)
+
+        def run_menu(self):
+            game_world.number_of_blocks = 10
+            array_of_blocks = Create_blocks()
+            array_of_blocks.spawn(game_world.number_of_blocks)
+            while not game_world.quit:
+                for event in pygame.event.get():
+                    if event.type == pygame.quit:
+                        game_world.quit = True
+                    pressed = pygame.key.get_pressed()
+                    if pressed[pygame.K_RETURN]: 
+                        game_world.game_loop()
+                game_world.screen.fill((50,50,50))
+                # menu = game_world.font.render("Blocky Blocks", 1, (255,0,0))
+                game_world.menu_text()
+                game_world.block_mover(game_world.number_of_blocks, array_of_blocks)
+                pygame.display.update()
+                game_world.clock.tick(60)
+            
+        def game_loop(self):
+            self.hero = Hero()
+            game_world.number_of_blocks = 1
+            array_of_blocks = Create_blocks()
+            array_of_blocks.spawn(game_world.number_of_blocks)
+            while not game_world.quit:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        game_world.quit = True
+                game_world.screen.fill((50,50,50))
+                self.hero.move()
+                game_world.number_of_blocks = game_world.difficulty(game_world.score_count, array_of_blocks, game_world.number_of_blocks)
+                game_world.score_count = game_world.show_score(game_world.score_count)
+                collision = game_world.collision_detection(game_world.number_of_blocks, array_of_blocks)
+                game_world.block_mover(game_world.number_of_blocks, array_of_blocks)
+                game_world.quit = collision
+                pygame.display.update()
+                game_world.clock.tick(60)
+        
     pygame.init()
-    myfont = pygame.font.SysFont("monospace", 30)
-    screen = pygame.display.set_mode((width, height))
-    pygame.display.set_caption('My Game')
-    clock = pygame.time.Clock()
-
-
+    game_world = Game_world()
+    
 
     class Block(pygame.sprite.Sprite):
         def __init__(self):
             pygame.sprite.Sprite.__init__(self)
-            self.xloc = width
-            self.yloc = random.randint(10, height)
-            self.speed = random.randint(1, 10)
+            self.xloc = game_world.width
+            self.yloc = random.randint(10, game_world.height)
+            # self.speed = random.randint(1, 10)
+            self.speed = 7
             self.rect = pygame.Rect(self.xloc, self.yloc, 30, 30)
 
         def make_and_move(self):
             self.rect = pygame.Rect(self.xloc, self.yloc, 30, 30)
-            pygame.draw.rect(screen, wall_color, pygame.Rect(self.rect))
+            pygame.draw.rect(game_world.screen, game_world.wall_color, pygame.Rect(self.rect))
             self.xloc -= self.speed
             if self.is_too_far():
                 self.reset()
@@ -39,9 +118,10 @@ def main():
             return self.xloc < -30
 
         def reset(self):
-            self.xloc = width
-            self.yloc = random.randint(10, height)
-            self.speed = random.randint(1, 5)
+            self.xloc = game_world.width
+            self.yloc = random.randint(10, game_world.height)
+            # self.speed = random.randint(1, 5)
+            self.speed = 7
                     
     class Create_blocks(object):
         def __init__(self):
@@ -51,8 +131,6 @@ def main():
             for i in range(number_of_blocks):
                 self.blocks_array.append(Block())
                 
-            
-    
     class Hero(pygame.sprite.Sprite):
         def __init__(self):
             pygame.sprite.Sprite.__init__(self)
@@ -61,85 +139,30 @@ def main():
             self.xloc = 100
             self.yloc = 100
             self.rect = pygame.Rect(self.xloc, self.yloc,self.width, self.height)
-            pygame.draw.rect(screen, color, pygame.Rect(self.rect))
+            pygame.draw.rect(game_world.screen, game_world.color, pygame.Rect(self.rect))
         
         def move(self):
             self.rect = pygame.Rect(self.xloc, self.yloc,self.width, self.height)
-            pygame.draw.rect(screen, color, pygame.Rect(self.rect))
+            pygame.draw.rect(game_world.screen, game_world.color, pygame.Rect(self.rect))
             pressed = pygame.key.get_pressed()
             if pressed[pygame.K_UP] and self.yloc >= 0: self.yloc -= 5
-            if pressed[pygame.K_DOWN] and self.yloc <= (height - self.height): self.yloc += 5
+            if pressed[pygame.K_DOWN] and self.yloc <= (game_world.height - self.height): self.yloc += 5
             if pressed[pygame.K_LEFT] and self.xloc >= 0: self.xloc -= 5
-            if pressed[pygame.K_RIGHT] and self.xloc <= (width - self.width): self.xloc += 5
+            if pressed[pygame.K_RIGHT] and self.xloc <= (game_world.width - self.width): self.xloc += 5
     
-    def collision_detection(number_of_blocks, all_blocks):
-        block_locations = []
-        collision = False
-        for i in range(number_of_blocks):
-            block_locations.append(all_blocks.blocks_array[i].rect)
-            if(block_locations[i].colliderect(hero.rect)):
-                collision = True
-        return collision
-
-    def block_mover(number_of_blocks, all_blocks):
-        for block in all_blocks.blocks_array:
-            block.make_and_move()
-        
-    def has_collided(collision):
-        if collision == True:
-            color = (255, 100, 0)
-        if collision == False:
-            color = (97, 159, 182)
-        return color
-
-    def show_score(score_count):
-        score_count = str(int(score_count) + 1)
-        score = myfont.render(score_count, 1, (255,0,0))
-        screen.blit(score, (200, 15))
-        return score_count
-
-    def difficulty(score_count, all_blocks, number_of_blocks):
-        if (int(score_count) % 100 == 0):
-            all_blocks.spawn(1)
-            number_of_blocks = number_of_blocks + 1
-        return number_of_blocks
-
-    
-    all_blocks = Create_blocks()
-    all_blocks.spawn(number_of_blocks)
-    hero = Hero()
-    stop_game = False
-    
-    
-    while not stop_game:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                stop_game = True
-
-        screen.fill((50,50,50))
-
-        hero.move()
-        number_of_blocks = difficulty(score_count, all_blocks, number_of_blocks)
-        collision = collision_detection(number_of_blocks, all_blocks)
-        # print collision
-        # color = has_collided(collision)
-        stop_game = collision
-        block_mover(number_of_blocks, all_blocks)
-        score_count = show_score(score_count)
-
-        # difficulty(score_count)
-        
-        
-        
-        
-        pygame.display.update()
-        clock.tick(60)
-
+   
+    game_world.run_menu()
+    # game_world.game_loop()
     pygame.quit()
 
 if __name__ == '__main__':
     main()
-
+# ^ move everything into a game_world class then have the while loop and my setup inside of that then you need to change the above code
+# game world methods should operate on things that they recieve game would pass in difficulty level, or number of blocks etc. 
+# game world is it's own thing, it's in init I have self.array_of_blocks it'll be initialized there and you can make changes without haveing to pass down the paramaters
 
 # function for moving, color, and collision detection
 # Collision detection not working for any but the first block
+
+
+# you need to use super classes instead of just game_world. for example like game_world.hero instead of super 

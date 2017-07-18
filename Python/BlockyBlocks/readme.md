@@ -31,4 +31,4 @@ This game in it’s current form is a simple avoidance game. You as the main blo
 
 ## Acknowledgements
  * **Chris Aquino**
- * [**Ya boi Carl!**](https://github.com/mutebard)
+ * [**Sha boi Carl!**](https://github.com/mutebard)
