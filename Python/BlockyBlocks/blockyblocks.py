@@ -18,6 +18,7 @@ def main():
             self.number_of_blocks = 1
             self.score_count = 1
             self.quit = False
+            self.block_speed = random.randint(5, 9)
             
 
         def block_mover(self, number_of_blocks, array_of_blocks):
@@ -45,6 +46,18 @@ def main():
             game_world.screen.blit(score, score_rect)
             return score_count
 
+        def menu_score(self, score_count):
+            score_count = str(int(score_count) + 1)
+            return score_count
+
+        def menu_blocks(self, score_count, array_of_blocks, number_of_blocks):
+            # score_count = str(int(score_count) + 1)
+            if (int(score_count) % 10 == 0 and number_of_blocks < 20):
+                array_of_blocks.spawn(1)
+                number_of_blocks = number_of_blocks + 1
+            return number_of_blocks
+            # return score_count
+
         def difficulty(self, score_count, array_of_blocks, number_of_blocks):
             if (int(score_count) % 100 == 0):
                 array_of_blocks.spawn(1)
@@ -57,7 +70,7 @@ def main():
             game_world.screen.blit(menu,menu_rect)
 
         def run_menu(self):
-            game_world.number_of_blocks = 10
+            game_world.number_of_blocks = 1
             array_of_blocks = Create_blocks()
             array_of_blocks.spawn(game_world.number_of_blocks)
             while not game_world.quit:
@@ -70,12 +83,15 @@ def main():
                 game_world.screen.fill((50,50,50))
                 # menu = game_world.font.render("Blocky Blocks", 1, (255,0,0))
                 game_world.menu_text()
+                game_world.number_of_blocks = game_world.menu_blocks(game_world.score_count, array_of_blocks, game_world.number_of_blocks)
+                game_world.score_count = game_world.menu_score(game_world.score_count)
                 game_world.block_mover(game_world.number_of_blocks, array_of_blocks)
                 pygame.display.update()
                 game_world.clock.tick(60)
             
         def game_loop(self):
             self.hero = Hero()
+            game_world.block_speed = 7
             game_world.number_of_blocks = 1
             array_of_blocks = Create_blocks()
             array_of_blocks.spawn(game_world.number_of_blocks)
@@ -106,7 +122,7 @@ def main():
             self.xloc = game_world.width
             self.yloc = random.randint(10, game_world.height)
             # self.speed = random.randint(1, 10)
-            self.speed = 7
+            self.speed = game_world.block_speed
             self.rect = pygame.Rect(self.xloc, self.yloc, 30, 30)
 
         def make_and_move(self):
