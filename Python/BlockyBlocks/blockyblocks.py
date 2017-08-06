@@ -3,8 +3,6 @@ from PIL import Image
 import time
 import random
 
-
-
 def main():
     class Game_world(object):
         def __init__(self):
