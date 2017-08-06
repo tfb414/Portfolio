@@ -86,10 +86,14 @@ def main():
                     pressed = pygame.key.get_pressed()
                     if pressed[pygame.K_RETURN]: 
                         game_world.game_loop()
-                if(game_world.score_count * 3 < 70):
-                    game_world.screen.fill((50,50,50))
-                else:
+                # if(game_world.score_count * 3 < 70):
+                game_world.screen.fill((50,50,50))
+                if(game_world.score_count * 3 < 80 and game_world.score_count * 3 > 70 ):
                     game_world.screen.fill((255,255,255))
+                # else:    
+                #     print 'there'
+                #     game_world.screen.fill((247, 243, 239))
+
                 
                 game_world.number_of_blocks = game_world.menu_blocks(game_world.score_count, array_of_blocks, game_world.number_of_blocks)
                 game_world.score_count = game_world.menu_score(game_world.score_count)
