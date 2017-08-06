@@ -89,7 +89,9 @@ def main():
                 game_world.score_count = game_world.show_score(game_world.score_count)
                 collision = game_world.collision_detection(game_world.number_of_blocks, array_of_blocks)
                 game_world.block_mover(game_world.number_of_blocks, array_of_blocks)
-                game_world.quit = collision
+                # game_world.quit = collision
+                if collision:
+                    game_world.run_menu()
                 pygame.display.update()
                 game_world.clock.tick(60)
         
