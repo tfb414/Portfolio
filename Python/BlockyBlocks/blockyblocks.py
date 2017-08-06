@@ -82,16 +82,18 @@ def main():
                         game_world.game_loop()
                 game_world.screen.fill((50,50,50))
                 # menu = game_world.font.render("Blocky Blocks", 1, (255,0,0))
-                game_world.menu_text()
+                
                 game_world.number_of_blocks = game_world.menu_blocks(game_world.score_count, array_of_blocks, game_world.number_of_blocks)
                 game_world.score_count = game_world.menu_score(game_world.score_count)
                 game_world.block_mover(game_world.number_of_blocks, array_of_blocks)
+                game_world.menu_text()
                 pygame.display.update()
                 game_world.clock.tick(60)
             
         def game_loop(self):
             self.hero = Hero()
             game_world.block_speed = 7
+            game_world.score_count = 0
             game_world.number_of_blocks = 1
             array_of_blocks = Create_blocks()
             array_of_blocks.spawn(game_world.number_of_blocks)
@@ -101,10 +103,11 @@ def main():
                         game_world.quit = True
                 game_world.screen.fill((50,50,50))
                 self.hero.move()
+                game_world.block_mover(game_world.number_of_blocks, array_of_blocks)
                 game_world.number_of_blocks = game_world.difficulty(game_world.score_count, array_of_blocks, game_world.number_of_blocks)
                 game_world.score_count = game_world.show_score(game_world.score_count)
                 collision = game_world.collision_detection(game_world.number_of_blocks, array_of_blocks)
-                game_world.block_mover(game_world.number_of_blocks, array_of_blocks)
+                
                 # game_world.quit = collision
                 if collision:
                     game_world.score_count = 0
