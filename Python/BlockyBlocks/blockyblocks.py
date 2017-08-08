@@ -101,10 +101,10 @@ def main():
         def button_debounce(self, selection):
             pressed = pygame.key.get_pressed()
             
-            if pressed[pygame.K_UP] and self.selection >= 1 and self.press_button > 11: 
+            if (pressed[pygame.K_UP] or pressed[pygame.K_w]) and self.selection >= 1 and self.press_button > 11: 
                 selection -= 1
                 self.press_button = 0
-            if pressed[pygame.K_DOWN] and self.selection <= 1 and self.press_button > 11: 
+            if (pressed[pygame.K_DOWN] or pressed[pygame.K_s]) and self.selection <= 1 and self.press_button > 11: 
                 selection += 1
                 self.press_button = 0
             elif self.press_button < 12: self.press_button += 1
@@ -245,10 +245,10 @@ def main():
             self.rect = pygame.Rect(self.xloc, self.yloc,self.width, self.height)
             pygame.draw.rect(game_world.screen, game_world.color, pygame.Rect(self.rect))
             pressed = pygame.key.get_pressed()
-            if pressed[pygame.K_UP] and self.yloc >= 0: self.yloc -= 5
-            if pressed[pygame.K_DOWN] and self.yloc <= (game_world.height - self.height): self.yloc += 5
-            if pressed[pygame.K_LEFT] and self.xloc >= 0: self.xloc -= 5
-            if pressed[pygame.K_RIGHT] and self.xloc <= (game_world.width - self.width): self.xloc += 5
+            if (pressed[pygame.K_DOWN] or pressed[pygame.K_w]) and self.yloc >= 0: self.yloc -= 5
+            if (pressed[pygame.K_DOWN] or pressed[pygame.K_s]) and self.yloc <= (game_world.height - self.height): self.yloc += 5
+            if (pressed[pygame.K_DOWN] or pressed[pygame.K_a]) and self.xloc >= 0: self.xloc -= 5
+            if (pressed[pygame.K_DOWN] or pressed[pygame.K_d]) and self.xloc <= (game_world.width - self.width): self.xloc += 5
     
    
     game_world.run_menu()
