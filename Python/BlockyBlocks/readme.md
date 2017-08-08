@@ -18,9 +18,10 @@ This game in it’s current form is a simple avoidance game. You as the main blo
 - [x] Scoring mechanic (7/13/17)
 - [ ] Different colors or images for items with different speeds
 - [ ] Images instead of blocks
+- [x] Menu intro (8/6/17)  
 - [ ] Better overall visuals
 - [ ] Clean up codebase
-- [x] Refactor the code into classes
+- [x] Refactor the code into classes (7/17)
 
 ## Built With
 

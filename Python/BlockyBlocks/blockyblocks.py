@@ -10,8 +10,8 @@ def main():
             self.height = 480
             self.screen = pygame.display.set_mode((self.width, self.height))
             self.score_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", 15)
-            self.font_size = 1
-            # self.font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", self.font_size)
+            self.title_font_size = 1
+            
             self.game_setup = pygame.display.set_caption('BlockyBlocks')
             self.clock = pygame.time.Clock()
             self.color = (77,137,7)
@@ -20,6 +20,8 @@ def main():
             self.score_count = 1
             self.quit = False
             self.block_speed = random.randint(5, 9)
+            self.menu_selection = 0
+            self.press_button = 0
             
 
         def block_mover(self, number_of_blocks, array_of_blocks):
@@ -41,8 +43,8 @@ def main():
         #         game_world.color = (97, 159, 182)
         #     return game_world.color
         def show_score(self, score_count):
-            score_count = str(int(score_count) + 1)
-            score = game_world.font.render(score_count, 1, (255,0,0))
+            score_count = str(score_count + 1)
+            score = game_world.title_font.render(score_count, 1, (255,0,0))
             score_rect = score.get_rect(center=(game_world.width/2, 40))
             game_world.screen.blit(score, score_rect)
             
@@ -66,69 +68,132 @@ def main():
                 number_of_blocks = number_of_blocks + 1
             return number_of_blocks
         
-        def menu_text(self, score_count):
+        def title_text(self, score_count):
             score_count = score_count * 3
             if score_count < 70:
-                self.font_size = score_count
-            self.font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", self.font_size)
-            menu = game_world.font.render("Blocky Blocks", 1, (255,0,0))
-            menu_rect = menu.get_rect(center=(game_world.width/2, 100))
-            game_world.screen.blit(menu,menu_rect)
+                self.title_font_size = score_count
+            self.title_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", self.title_font_size)
+            menu = self.title_font.render("Blocky Blocks", 1, (255,0,0))
+            menu_rect = menu.get_rect(center=(self.width/2, 100))
+            self.screen.blit(menu,menu_rect)
+
+        def menu_items(self, score_count):
+            score_count = score_count * 3
+            if (score_count > 80):
+                self.menu_item_font_size = score_count - 80
+                if(score_count > 125):
+                    self.menu_item_font_size = 45
+                self.menu_item_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", self.menu_item_font_size)
+                start_game = self.menu_item_font.render("Start Game", 1, (255,0,0))
+                start_game_rect = start_game.get_rect(center=(self.width/2, 200))
+                high_scores = self.menu_item_font.render("High Scores", 1, (255,0,0))
+                high_scores_rect = high_scores.get_rect(center=(self.width/2, 250))
+                quit_game = self.menu_item_font.render("Quit", 1, (255,0,0))
+                quit_game_rect = quit_game.get_rect(center=(self.width/2, 300))
+                self.screen.blit(quit_game,quit_game_rect)
+                self.screen.blit(start_game,start_game_rect)
+                self.screen.blit(high_scores,high_scores_rect)
+            
+        # have a value and when they go up and down it adds or subtracts form the value. Those values are tied to whichever thing
+      
+            return self.menu_selection
+            
+        def button_debounce(self, selection):
+            pressed = pygame.key.get_pressed()
+            
+            if pressed[pygame.K_UP] and self.selection >= 1 and self.press_button > 11: 
+                selection -= 1
+                self.press_button = 0
+            if pressed[pygame.K_DOWN] and self.selection <= 1 and self.press_button > 11: 
+                selection += 1
+                self.press_button = 0
+            elif self.press_button < 12: self.press_button += 1
+            print self.press_button
+            return selection
+
+        def use_menu(self, menu_selection, score_count):
+            self.location = {
+                0: 200,
+                1: 250,
+                2: 300
+            }
+            score_count = score_count * 3
+            self.selection = menu_selection
+            if (score_count > 80):
+                self.menu_item_font_size = score_count - 80
+                if(score_count > 125):
+                    self.menu_item_font_size = 45
+             
+                self.menu_item_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", self.menu_item_font_size)
+                self.selection = self.button_debounce(self.selection)
+                arrow = self.menu_item_font.render(">", 1, (255,0,0))
+                arrow_rect = arrow.get_rect(center=(100, self.location[self.selection]))
+                self.screen.blit(arrow,arrow_rect)
+            
+            return self.selection
+
+
+
+        def full_menu(self, score_count):
+            # score_count = score_count * 3
+            self.title_text(score_count)
+            self.menu_items(score_count)
+            self.menu_selection = self.use_menu(self.menu_selection, score_count)
+
+
 
         def run_menu(self):
-            game_world.number_of_blocks = 1
+            self.number_of_blocks = 1
             array_of_blocks = Create_blocks()
-            array_of_blocks.spawn(game_world.number_of_blocks)
-            while not game_world.quit:
+            array_of_blocks.spawn(self.number_of_blocks)
+            while not self.quit:
                 for event in pygame.event.get():
                     if event.type == pygame.quit:
-                        game_world.quit = True
+                        self.quit = True
                     pressed = pygame.key.get_pressed()
-                    if pressed[pygame.K_RETURN]: 
-                        game_world.game_loop()
-                # if(game_world.score_count * 3 < 70):
-                game_world.screen.fill((50,50,50))
-                if(game_world.score_count * 3 < 80 and game_world.score_count * 3 > 70 ):
-                    game_world.screen.fill((255,255,255))
-                # else:    
-                #     print 'there'
-                #     game_world.screen.fill((247, 243, 239))
-
+                    if pressed[pygame.K_RETURN] and self.selection == 0: 
+                        self.game_loop()
+                    
+                    if pressed[pygame.K_RETURN] and self.selection == 2: 
+                        self.quit = True
+                    
                 
-                game_world.number_of_blocks = game_world.menu_blocks(game_world.score_count, array_of_blocks, game_world.number_of_blocks)
-                game_world.score_count = game_world.menu_score(game_world.score_count)
-                game_world.block_mover(game_world.number_of_blocks, array_of_blocks)
+                self.screen.fill((50,50,50))
+                self.number_of_blocks = self.menu_blocks(self.score_count, array_of_blocks, self.number_of_blocks)
+                self.score_count = self.menu_score(self.score_count)
+                self.block_mover(self.number_of_blocks, array_of_blocks)
                 
                 
-                game_world.menu_text(game_world.score_count)
+                # self.title_text(self.score_count)
+                self.full_menu(self.score_count)
                 pygame.display.update()
-                game_world.clock.tick(60)
+                self.clock.tick(60)
             
         def game_loop(self):
             self.hero = Hero()
-            game_world.block_speed = 7
-            game_world.score_count = 0
-            game_world.number_of_blocks = 1
+            self.block_speed = 7
+            self.score_count = 0
+            self.number_of_blocks = 1
             array_of_blocks = Create_blocks()
-            array_of_blocks.spawn(game_world.number_of_blocks)
-            while not game_world.quit:
+            array_of_blocks.spawn(self.number_of_blocks)
+            while not self.quit:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
-                        game_world.quit = True
-                game_world.screen.fill((50,50,50))
+                        self.quit = True
+                self.screen.fill((50,50,50))
                 self.hero.move()
-                game_world.block_mover(game_world.number_of_blocks, array_of_blocks)
-                game_world.number_of_blocks = game_world.difficulty(game_world.score_count, array_of_blocks, game_world.number_of_blocks)
-                game_world.score_count = game_world.show_score(game_world.score_count)
+                self.block_mover(self.number_of_blocks, array_of_blocks)
+                self.number_of_blocks = self.difficulty(self.score_count, array_of_blocks, self.number_of_blocks)
+                self.score_count = self.show_score(self.score_count)
                 
-                collision = game_world.collision_detection(game_world.number_of_blocks, array_of_blocks)
+                collision = self.collision_detection(self.number_of_blocks, array_of_blocks)
                 
-                # game_world.quit = collision
+                # self.quit = collision
                 if collision:
-                    game_world.score_count = 0
-                    game_world.run_menu()
+                    self.score_count = 0
+                    self.run_menu()
                 pygame.display.update()
-                game_world.clock.tick(60)
+                self.clock.tick(60)
         
     pygame.init()
     game_world = Game_world()
