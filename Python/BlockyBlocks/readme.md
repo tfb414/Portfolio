@@ -22,11 +22,13 @@ This game in it’s current form is a simple avoidance game. You as the main blo
 - [ ] Better overall visuals
 - [ ] Clean up codebase
 - [x] Refactor the code into classes (7/17)
+- [ ] Add ability to add highscores to a postgreSQL database
 
 ## Built With
 
 * [Python 2.7.13] https://www.python.org/downloads/
 * Pygame
+* Postgres
 
 ## Authors
 
@@ -35,3 +37,6 @@ This game in it’s current form is a simple avoidance game. You as the main blo
 ## Acknowledgements
  * **Chris Aquino**
  * [**Sha boi Carl!**](https://github.com/mutebard)
+
+
+problems - had some issues with getting the timing to work when pushing buttons on the menu it woudld read multiple clicks so I added a counter each time that would start over when someone clicked a button.
