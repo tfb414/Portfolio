@@ -12,7 +12,7 @@ def main():
             self.screen = pygame.display.set_mode((self.width, self.height))
             self.score_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", 15)
             self.title_font_size = 1
-            
+
             self.game_setup = pygame.display.set_caption('BlockyBlocks')
             self.clock = pygame.time.Clock()
             # self.color = self.text_color
@@ -28,14 +28,7 @@ def main():
             self.block_speed = random.randint(5, 9)
             self.menu_selection = 0
             self.press_button = 0
-    #         self.score_db = psycopg2.connect("dbname=blockyblocks user=timbrady")
-    #         self.cur = self.score_db.cursor()
-    #         self.cur.mogrify("""select * from scores order by score desc limit 10;""")
-    #         self.cur.mogrify("""insert into scores (name, score)
-	# values ('derp', 34);""")
             
-        
-
         def block_mover(self, number_of_blocks, array_of_blocks):
             for block in array_of_blocks.blocks_array:
                 block.make_and_move()
@@ -87,14 +80,32 @@ def main():
             return scores
 
         def display_scores(self, score_count):
-            print 'derp'
+            pressed = pygame.key.get_pressed()
+            if pressed[pygame.K_z]: 
+                self.screen.fill(self.background_color)
+                self.menu_options = self.menu_options + 1
             # score_count = score_count * 3
             # if score_count < 70:
-            #     self.title_font_size = score_count
-            # self.title_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", self.title_font_size)
-            # menu = self.title_font.render("High Scores", 1, self.text_color)
-            # menu_rect = menu.get_rect(center=(self.width/2, 100))
-            # self.screen.blit(menu,menu_rect)
+            self.title_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", 50)
+            high_scores = self.title_font.render("High Scores", 1, self.text_color)
+            high_scores_rect = high_scores.get_rect(center=(self.width/2, 100))
+            self.screen.blit(high_scores, high_scores_rect)
+            self.print_scores_to_screen()
+            
+
+        def print_scores_to_screen(self):
+            self.score_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", 35)
+            self.scores = self.db_return_scores()
+            self.score_location = 150
+            self.self_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", 20)
+            counter = 1
+            for scores in self.scores:
+                single_score = self.score_font.render(str(counter) + ". " + (str(scores[0]) + " - " + str(scores[1])), 1, self.text_color)
+                counter = counter + 1
+                single_score_rect = single_score.get_rect(center=(self.width/2, self.score_location))
+                self.screen.blit(single_score, single_score_rect)
+                self.score_location = self.score_location + 30
+
 
         def title_text(self, score_count):
             score_count = score_count * 3
@@ -121,9 +132,21 @@ def main():
                 self.screen.blit(quit_game,quit_game_rect)
                 self.screen.blit(start_game,start_game_rect)
                 self.screen.blit(high_scores,high_scores_rect)
+                self.change_box_color(self.box_color)
       
             return self.menu_selection
             
+        def change_box_color(self, box_color):
+            color_0 = box_color[0]
+            color_1 = box_color[1]
+            color_2 = box_color[2]
+            if color_2 > 0:
+                color_2 = color_2 - 1
+            elif(color_2 == 0):
+                color_2 = 255
+            final_answer = "(" + str(color_0) + "," + str(color_1) + "," + str(color_2) + ")"
+            print final_answer
+
         def button_debounce(self, selection):
             pressed = pygame.key.get_pressed()
             if (pressed[pygame.K_UP] or pressed[pygame.K_w]) and self.selection >= 1 and self.press_button > 9: 
@@ -164,10 +187,18 @@ def main():
 
         def run_menu(self):
             self.number_of_blocks = 1
-            self.menu_options = 0
+            self.menu_options = 1
             array_of_blocks = Create_blocks()
             array_of_blocks.spawn(self.number_of_blocks)
             while not self.quit:
+                self.screen.fill(self.background_color)
+                self.number_of_blocks = self.menu_blocks(self.score_count, array_of_blocks, self.number_of_blocks)
+                self.score_count = self.menu_score(self.score_count)
+                self.block_mover(self.number_of_blocks, array_of_blocks)
+                if self.menu_options % 2 != 0:
+                    self.full_menu(self.score_count)
+                else:
+                    self.display_scores(self.score_count)
                 for event in pygame.event.get():
                     if event.type == pygame.quit:
                         self.quit = True
@@ -177,29 +208,10 @@ def main():
 
                     if pressed[pygame.K_RETURN] and self.selection == 1:
                         # print self.db_return_scores()
-                        print 'we hit enter'
-                        self.menu_options == 1
-                    
+                        self.menu_options = self.menu_options + 1
                     if pressed[pygame.K_RETURN] and self.selection == 2: 
                         self.quit = True
-
                     
-                    
-                # self.screen.fill((220,240,247))
-                self.screen.fill(self.background_color)
-                self.number_of_blocks = self.menu_blocks(self.score_count, array_of_blocks, self.number_of_blocks)
-                self.score_count = self.menu_score(self.score_count)
-                self.block_mover(self.number_of_blocks, array_of_blocks)
-        
-                # self.title_text(self.score_count)
-
-                # tim you're trying to get it so the background stays the same and the menu changes
-                if(self.menu_options == 0):
-                    print 'full menu'
-                    self.full_menu(self.score_count)
-                if(self.menu_options == 1):
-                    print 'display scores'
-                    self.display_scores(self.score_count)
 
                 pygame.display.update()
                 self.clock.tick(60)
@@ -303,3 +315,5 @@ if __name__ == '__main__':
 
 
 # you need to use super classes instead of just game_world. for example like game_world.hero instead of super 
+
+
