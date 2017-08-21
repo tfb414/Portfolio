@@ -12,13 +12,13 @@ def main():
             self.screen = pygame.display.set_mode((self.width, self.height))
             self.score_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", 15)
             self.title_font_size = 1
-
             self.game_setup = pygame.display.set_caption('BlockyBlocks')
+            self.array_of_colors_to_change_to = [1, [50,50, 50], [250, 250 , 250], [100,100,100], [3, 75, 250]]
             self.clock = pygame.time.Clock()
-            # self.color = self.text_color
+            # hero color is below
             self.color = (255,255,255)
             self.text_color = (255,255,255)
-# hero color
+# this is the color of the boxes attacking
             self.box_color = (255,255,255)
             self.background_color = (0,0,0)
             # this is the color of the blocks?
@@ -84,8 +84,6 @@ def main():
             if pressed[pygame.K_z]: 
                 self.screen.fill(self.background_color)
                 self.menu_options = self.menu_options + 1
-            # score_count = score_count * 3
-            # if score_count < 70:
             self.title_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", 50)
             high_scores = self.title_font.render("High Scores", 1, self.text_color)
             high_scores_rect = high_scores.get_rect(center=(self.width/2, 100))
@@ -132,20 +130,38 @@ def main():
                 self.screen.blit(quit_game,quit_game_rect)
                 self.screen.blit(start_game,start_game_rect)
                 self.screen.blit(high_scores,high_scores_rect)
-                self.change_box_color(self.box_color)
+                self.do_the_dang_thing()
       
             return self.menu_selection
+
+        def change_box_color(self, current_color, final_color):
+            current_color_0 = current_color[0]
+            current_color_1 = current_color[1]
+            current_color_2 = current_color[2]
+            final_color_0 = final_color[0]
+            final_color_1 = final_color[1]
+            final_color_2 = final_color[2]
+            if current_color_0 > final_color[0]:
+                current_color_0 = current_color_0 - .5
+            if current_color_1 > final_color[1]:
+                current_color_1 = current_color_1 - .5
+            if current_color_2 > final_color[2]:
+                current_color_2 = current_color_2 - .5
+            if current_color_0 < final_color[0]:
+                current_color_0 = current_color_0 + .5
+            if current_color_1 < final_color[1]:
+                current_color_1 = current_color_1 + .5
+            if current_color_2 < final_color[2]:
+                current_color_2 = current_color_2 + .5
+            rgb = [current_color_0, current_color_1, current_color_2]
+            return rgb
+        
+        def do_the_dang_thing(self):
+            print(self.array_of_colors_to_change_to[self.array_of_colors_to_change_to[0]])
+            self.box_color = self.change_box_color(self.box_color, self.array_of_colors_to_change_to[self.array_of_colors_to_change_to[0]])
+            if self.box_color == self.array_of_colors_to_change_to[self.array_of_colors_to_change_to[0]]:
+                self.array_of_colors_to_change_to[0] = self.array_of_colors_to_change_to[0] + 1
             
-        def change_box_color(self, box_color):
-            color_0 = box_color[0]
-            color_1 = box_color[1]
-            color_2 = box_color[2]
-            if color_2 > 0:
-                color_2 = color_2 - 1
-            elif(color_2 == 0):
-                color_2 = 255
-            final_answer = "(" + str(color_0) + "," + str(color_1) + "," + str(color_2) + ")"
-            print final_answer
 
         def button_debounce(self, selection):
             pressed = pygame.key.get_pressed()
@@ -180,7 +196,6 @@ def main():
             return self.selection
 
         def full_menu(self, score_count):
-            # score_count = score_count * 3
             self.title_text(score_count)
             self.menu_items(score_count)
             self.menu_selection = self.use_menu(self.menu_selection, score_count)
@@ -204,6 +219,7 @@ def main():
                         self.quit = True
                     pressed = pygame.key.get_pressed()
                     if pressed[pygame.K_RETURN] and self.selection == 0: 
+                        self.box_color = (255, 255, 255)
                         self.game_loop()
 
                     if pressed[pygame.K_RETURN] and self.selection == 1:
@@ -211,8 +227,6 @@ def main():
                         self.menu_options = self.menu_options + 1
                     if pressed[pygame.K_RETURN] and self.selection == 2: 
                         self.quit = True
-                    
-
                 pygame.display.update()
                 self.clock.tick(60)
             
@@ -227,14 +241,13 @@ def main():
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self.quit = True
-                # self.screen.fill((220,240,247))
                 self.screen.fill(self.background_color)
                 self.hero.move()
                 self.block_mover(self.number_of_blocks, array_of_blocks)
                 self.number_of_blocks = self.difficulty(self.score_count, array_of_blocks, self.number_of_blocks)
                 self.score_count = self.show_score(self.score_count)
-                
                 collision = self.collision_detection(self.number_of_blocks, array_of_blocks)
+                self.box_color = self.change_box_color(self.box_color, (12, 100, 250))
                 
                 # self.quit = collision
                 if collision:
@@ -242,9 +255,11 @@ def main():
                     self.run_menu()
                 pygame.display.update()
                 self.clock.tick(60)
+
+        # def add_score_to_db(self):
+
         
     pygame.init()
-    
     game_world = Game_world()
     
 
