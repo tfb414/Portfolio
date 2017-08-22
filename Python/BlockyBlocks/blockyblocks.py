@@ -13,7 +13,7 @@ def main():
             self.score_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", 15)
             self.title_font_size = 1
             self.game_setup = pygame.display.set_caption('BlockyBlocks')
-            self.array_of_colors_to_change_to = [1, [50,50, 50], [250, 250 , 250], [100,100,100], [3, 75, 250]]
+            self.array_of_colors_to_change_to = [1, [50,50, 255], [3, 250 , 250], [255,200,100], [3, 75, 250]]
             self.clock = pygame.time.Clock()
             # hero color is below
             self.color = (255,255,255)
@@ -130,7 +130,7 @@ def main():
                 self.screen.blit(quit_game,quit_game_rect)
                 self.screen.blit(start_game,start_game_rect)
                 self.screen.blit(high_scores,high_scores_rect)
-                self.do_the_dang_thing()
+                self.loop_through_block_color_array()
       
             return self.menu_selection
 
@@ -156,11 +156,15 @@ def main():
             rgb = [current_color_0, current_color_1, current_color_2]
             return rgb
         
-        def do_the_dang_thing(self):
+        def loop_through_block_color_array(self):
             print(self.array_of_colors_to_change_to[self.array_of_colors_to_change_to[0]])
             self.box_color = self.change_box_color(self.box_color, self.array_of_colors_to_change_to[self.array_of_colors_to_change_to[0]])
             if self.box_color == self.array_of_colors_to_change_to[self.array_of_colors_to_change_to[0]]:
-                self.array_of_colors_to_change_to[0] = self.array_of_colors_to_change_to[0] + 1
+                if self.box_color == self.array_of_colors_to_change_to[self.array_of_colors_to_change_to[0]] and self.array_of_colors_to_change_to[0] == 4:
+                    self.array_of_colors_to_change_to[0] = 1
+                else:
+                    self.array_of_colors_to_change_to[0] = self.array_of_colors_to_change_to[0] + 1
+            
             
 
         def button_debounce(self, selection):
@@ -247,7 +251,7 @@ def main():
                 self.number_of_blocks = self.difficulty(self.score_count, array_of_blocks, self.number_of_blocks)
                 self.score_count = self.show_score(self.score_count)
                 collision = self.collision_detection(self.number_of_blocks, array_of_blocks)
-                self.box_color = self.change_box_color(self.box_color, (12, 100, 250))
+                self.loop_through_block_color_array()
                 
                 # self.quit = collision
                 if collision:
