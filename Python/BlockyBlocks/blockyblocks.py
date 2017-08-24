@@ -184,6 +184,7 @@ def main():
                 1: 250,
                 2: 300
             }
+            
             score_count = score_count * 3
             self.selection = menu_selection
             if (score_count > 80):
