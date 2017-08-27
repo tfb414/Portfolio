@@ -205,6 +205,9 @@ def main():
             self.menu_items(score_count)
             self.menu_selection = self.use_menu(self.menu_selection, score_count)
 
+        def record_score(self, score_count):
+            self.name_to_record = ""
+
         def run_menu(self):
             self.number_of_blocks = 1
             self.menu_options = 1
