@@ -97,7 +97,10 @@ p{
 
 .header{
 	text-align:center;
-	background:url(../img/pw_maze_black_2X.png) left top repeat;
+	background:url(../img/photos/DSC_0045_cropped.JPG);
+	background-size: cover;
+	background-repeat:   no-repeat;
+    background-position: center center;  
 	padding:280px 0;
 }
 .logo{
