@@ -97,7 +97,7 @@ p{
 
 .header{
 	text-align:center;
-	background:url(../img/photos/DSC_0045_cropped.JPG);
+	background:url(../img/photos/DSC_0033.JPG);
 	background-size: cover;
 	background-repeat:   no-repeat;
     background-position: center center;  
@@ -404,7 +404,7 @@ img {
 /* Clients
 ---------------------------------*/
 .client-part{
-	background:url(../img/section-bg1.jpg) center center no-repeat;
+	background:url(../img/pw_maze_black.png) center center no-repeat;
 	background-size:cover;
 	padding:55px 0;
 	text-align:center;
@@ -448,7 +448,7 @@ img {
 	width:68px;
 	height:68px;
 	margin:0 auto;
-	border:2px solid #7cc576;
+	
 	border-radius:50%;
 	display:block;
 	line-height:68px;
@@ -490,6 +490,17 @@ border: 2px solid #fff;
 }
 .main-section.team h6{
 	margin-bottom:40px;
+}
+
+.tech-icon-size{
+	max-width: 100px;
+}
+.tech-icon-column-spacing{
+	margin-top: 30px;
+}
+
+.client-title{
+	color: white;
 }
 
 
