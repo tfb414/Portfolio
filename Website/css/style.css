@@ -423,9 +423,13 @@ img {
 }
 .sizing {
 	max-height: 262.5px;
+	max-width: 350px;
 	margin-bottom: 0px!important;
+	margin: auto;
 }
-.background-for-blocky{
+.background-for-portfolio{
+	height: 262.5px;
+	width: 350px;
 	background-color: #d3d3d3;
 }
 .portfolio-top-margin{
