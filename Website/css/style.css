@@ -103,6 +103,12 @@ p{
     background-position: center center;  
 	padding:280px 0;
 }
+.center{
+	margin-left: 0;
+	margin-right: 0;
+	padding-right: 0;
+	padding-left: 0;
+}
 .logo{
 	width:130px;
 	margin:0 auto 35px;
@@ -252,6 +258,14 @@ color: #fff;
 .featured-work{
 	font-size:14px;
 }
+/* .img-center{
+	margin:auto;
+} */
+.vcenter {
+	vertical-align: middle;
+	margin-top: auto;
+	margin-bottom: auto;
+}
 .featured-work h2{
 	text-align:left;
 }
@@ -323,6 +337,8 @@ color: #fff;
 	list-style:none;
 	text-align:center;
 }
+
+
 .Portfolio-nav li{
 	margin:0 10px;
 	display:inline;
@@ -362,6 +378,11 @@ color: #fff;
 	float:left;
 	padding:0;
 }
+
+
+.background-padding{
+	padding-bottom: 87.5px;
+}
 .Portfolio-box img{
 	margin-bottom:25px;
 	transition:all 0.3s ease-in-out;
@@ -399,6 +420,16 @@ img {
 
 .main-section.paddind{
 	padding-bottom:60px;
+}
+.sizing {
+	max-height: 262.5px;
+	margin-bottom: 0px!important;
+}
+.background-for-blocky{
+	background-color: #d3d3d3;
+}
+.portfolio-top-margin{
+	margin-top: 25px;
 }
 
 /* Clients
@@ -513,7 +544,7 @@ border: 2px solid #fff;
 .team-leader-box{
 	width:30.66%;
 	margin-right: 3.82979%;
-	height: 490px;
+	height: 600px;
 	overflow: hidden;
 	text-align: center;
 	float: left;

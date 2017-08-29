@@ -13,7 +13,7 @@ def main():
             self.score_font = pygame.font.Font("/Users/timbrady/Documents/Development/Code-practice/DigitalCrafts/Week2/day3/fonts/LuckiestGuy.ttf", 15)
             self.title_font_size = 1
             self.game_setup = pygame.display.set_caption('BlockyBlocks')
-            self.array_of_colors_to_change_to = [1, [50,50, 255], [3, 250 , 250], [255,200,100], [3, 75, 250]]
+            self.array_of_colors_to_change_to = [1, [50,50, 255], [3, 250 , 250], [255,200,100], [3, 75, 250], [255,255,255]]
             self.clock = pygame.time.Clock()
             # hero color is below
             self.color = (255,255,255)
