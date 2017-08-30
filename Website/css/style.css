@@ -261,10 +261,17 @@ color: #fff;
 /* .img-center{
 	margin:auto;
 } */
-.vcenter {
+.row{
+	
+}
+.center {
+	/* display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center; */
 	vertical-align: middle;
-	margin-top: auto;
-	margin-bottom: auto;
+	height:100px;
+	width:100px;
 }
 .featured-work h2{
 	text-align:left;
@@ -369,7 +376,7 @@ color: #fff;
 	padding-left:15px;
 }
 
-.Portfolio-box{
+/* .Portfolio-box{
 	text-align:center;
 	margin-bottom:30px;
 	height:350px;
@@ -377,7 +384,7 @@ color: #fff;
 	overflow:hidden;
 	float:left;
 	padding:0;
-}
+} */
 
 
 .background-padding{
@@ -390,8 +397,59 @@ color: #fff;
 	-webkit-transition:all 0.3s ease-in-out;	
 }
 
-.Portfolio-box img:hover {
+.Portfolio-box:hover {
 	opacity: 0.6;
+}
+.Portfolio-box {
+	/* border: 4px solid #eaebed; */
+	display: inline-block;
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+	margin: 5px;
+	text-align: center;
+	position: relative;
+	
+}
+.overlay {
+	display:none;
+	height: 100%;
+	z-index: 200;
+	transition: all 0.7s ease;
+	padding-top: 40px
+}
+.overlay p,
+.overlay h3,
+.project a {
+	color: black;
+	
+}
+.overlay button {
+	color: black;
+	padding: 21px;
+	border: none;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	background: #9bd9f2;
+	color: white;
+}
+.overlay button:hover {
+	transition: all 0.7s ease;
+	background: #7c7e82;
+}
+.Portfolio-box:hover .overlay{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 262.5px;
+	background: #d3d3d3;
+    opacity: 0.9;
+    top: 0;
+}
+.overlay h3 {
+	margin-top: 0;
+	font-family: 'Blanc-Medium';
+	text-transform: uppercase;
 }
 
 .Portfolio-nav li a.current{
@@ -421,17 +479,21 @@ img {
 .main-section.paddind{
 	padding-bottom:60px;
 }
+.background-for-portfolio{
+	display:flex;
+	height: 262.5px;
+	width: 350px;
+	background-color: #d3d3d3;
+	align-items: center;
+	justify-content: center;
+}
 .sizing {
 	max-height: 262.5px;
 	max-width: 350px;
 	margin-bottom: 0px!important;
-	margin: auto;
 }
-.background-for-portfolio{
-	height: 262.5px;
-	width: 350px;
-	background-color: #d3d3d3;
-}
+
+
 .portfolio-top-margin{
 	margin-top: 25px;
 }
