@@ -251,6 +251,7 @@ color: #fff;
 }
 .main-section.alabaster{
 	background:#fafafa;
+	padding-bottom: 30px;
 }
 
 /* Featured Work
@@ -448,7 +449,7 @@ color: #fff;
 	color: white;
 	border: 2px solid white;
 }
-.Portfolio-box:hover .overlay{
+.background-for-portfolio:hover .overlay{
     display: block;
     position: absolute;
     width: 100%;
@@ -488,7 +489,8 @@ img {
 }
 
 .main-section.paddind{
-	padding-bottom:60px;
+	padding-bottom:40px;
+	padding-top: 30px;
 }
 .background-for-portfolio{
 	display:flex;
