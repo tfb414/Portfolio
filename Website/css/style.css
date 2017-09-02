@@ -7,6 +7,8 @@
 
 /* CSS Document */
 
+
+
 /* Float Elements 
 ---------------------------------*/
 .fl-lt {float:left;}
@@ -14,6 +16,7 @@
 
 /* Clear Floated Elements
 ---------------------------------*/
+
 .clear {
   clear: both;
   display: block;
@@ -96,11 +99,11 @@ p{
 ---------------------------------*/
 
 .header{
-	text-align:center;
+	text-align:center; 
 	background:url(../img/photos/DSC_0033.JPG);
 	background-size: cover;
 	background-repeat:   no-repeat;
-    background-position: center center;  
+    background-position: center center;   */
 	padding:280px 0;
 }
 .center{
