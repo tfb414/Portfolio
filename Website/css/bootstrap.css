@@ -5448,8 +5448,21 @@ button.close {
   padding-bottom: 20px;
   color: #ffffff;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  /* text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); */
+  text-shadow: black 0.2em 0.12em 0.4em;
+
+  
+	font-family: 'Montserrat',sans-serif;
+	font-size:18px;
+	
 }
+
+.carousel-caption h3{
+  color: #ffffff;
+  font-family: 'Montserrat',sans-serif;
+	font-size:18px;
+}
+
 .carousel-caption .btn {
   text-shadow: none;
 }

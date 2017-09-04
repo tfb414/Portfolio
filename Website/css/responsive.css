@@ -17,7 +17,9 @@
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	/****Ipad Portrait 768 Container 750 ****/
 	body{ font-size:13px;}
-	p{ line-height:20px ;}
+	p{ line-height:20px;
+		font-size: 15px;
+	}
 	.header h1{ font-size:46px;}
 	.main-nav ul li a{ padding:14px;}
 	.small-logo{ padding:0 20px;}
