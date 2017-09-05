@@ -94,7 +94,7 @@
 	
 }
 
-@media only screen and (max-width: 479px) {
+ @media only screen and (max-width: 479px) {
 	/****Mobile Portrait 320 ****/
 	.contact-info-box{ margin-left:0px;}
 	.header{ padding:40px;}
@@ -103,6 +103,10 @@
 	.c-logo-part ul li{ display:block;}
 	.Portfolio-box{  max-width:300px !important; width:96.4% !important; margin:0 !important}
 	.Portfolio-box img { max-width:100%;}
-	.portfolioContainer{ width:280px !important; margin:0 auto !important } 
+	.portfolioContainer{ width:280px !important; margin:0 auto !important; padding-left:0;} 
+	.background-for-portfolio{max-width:100%}
+	.overlay{padding-top: 10px;}
+	.overlay button{position: relative; left: auto; margin-top: 100px; margin-bottom: 20px !important}
+	h2.project-title{margin: 0 0 5px 0}
 	
-}
+} 

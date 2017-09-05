@@ -1026,7 +1026,7 @@ Parallax
 
 .parallax { 
     /* The image used */
-    background-image: url("../img/photos/DSC_0045_Cropped.jpg");
+    background-image: url("../img/photos/DSC_0045_Cropped_sized.jpg");
 
     /* Set a specific height */
     height: 250px; 
