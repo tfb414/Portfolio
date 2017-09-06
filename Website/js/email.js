@@ -1,29 +1,25 @@
-var myform = $("form#portContactForm");
+var myform = $("#contactForm");
 myform.submit(function(event){
+    console.log('did we make it?')
 	event.preventDefault();
 
   // Change to your service ID, or keep using the default service
   var service_id = "default_service";
-  var template_id = "portfolio_contact_form";
+  var template_id = "temp_1";
 
-  myform.find("button").text("Sending...");
-  emailjs.sendForm(service_id,template_id,"portContactForm")
+  emailjs.sendForm(service_id,template_id, "contactForm")
   	.then(function(){ 
-        $(".contact-tagline").html("Sent! Thank you!");
-        myform.find("button").text("Send");
+        $("#sendmessage").css("display", "block");
+        // myform.find("button").text("Send");
+        $('[data-target="emailForm"]').trigger("reset");
+        
     }, function(err) {
-        $(".contact-tagline").html("Yikes...Send email failed!\r\n Response:\n " + JSON.stringify(err));
-        myform.find("button").text("Send");
+        $("#sendmessage").css("display", "block");
+        $("#sendmessage").html("oopsie poopsie, it didn't work");
+        $("#sendmessage").css("display", "inline");
+        
     });
   return false;
 });
 
 
-<form id="portContactForm" method="post">
-            <div class="name-email">
-                <input type="text" name="from_name" placeholder="Name" required/>
-                <input type="email" name="from_email" placeholder="Email" required/>
-            </div>
-            <textarea name="message_html" id="messageBox" cols="20" rows="5" placeholder="Message" required></textarea>
-            <button class="send">Send</button>
-        </form>

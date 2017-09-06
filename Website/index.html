@@ -32,12 +32,18 @@
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="css/responsive.css" rel="stylesheet" type="text/css">
     <link href="css/animate.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init("user_hykdU8jONGSM9pmWPaBOb");
+       })();
+    </script>
     
     
     <!--[if IE]><style type="text/css">.pie {behavior:url(PIE.htc);}</style><![endif]-->
     
     
-    <script src="contactform/contactform.js"></script>
+    
     
   </head>
 
@@ -426,7 +432,7 @@
                     </div>
                     <h3 class="wow fadeInDown delay-06s">Tim Brady</h3>
                     <span class="wow fadeInDown delay-06s">Software Engineer</span>
-                    <p class="wow fadeInDown delay-06s">Tim is the lone engineer in the operation. After many years of feeling underutilized in his job he decided to enter the field of software development. Currently he is in a 16 week program at Digital Crafts where he is learning full-stack software development. Tim's hobbies include backpacking, photography, woodworking, and ultimate frisbee.</p>
+                    <p class="wow fadeInDown delay-06s">Tim is the lone engineer in the operation among this pack of wild dogs. After many years of feeling underutilized at his job he decided to enter the field of software development. Currently he is in a 16 week program at Digital Crafts where he is learning full-stack software development. Tim's hobbies include backpacking, photography, woodworking, and ultimate frisbee.</p>
                 </div>
                 <div class="team-leader-box">
                     <div class="team-leader wow fadeInDown delay-09s"> 
@@ -477,13 +483,13 @@
     
                 
               <div class="col-lg-6 col-sm-5 wow fadeInUp delay-05s">
-                  <div class="form">
+                  <div class="form" >
                       
                         <div id="sendmessage">Your message has been sent. Thank you!</div>
                         <div id="errormessage"></div>
-                        <form action="" method="post" role="form" class="contactForm">
+                        <form action="" method="post" role="form" class="contactForm" id="contactForm" data-target="emailForm">
                             <div class="form-group">
-                                <input type="text" name="name" class="form-control input-text" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <input type="text" name="name" class="form-control input-text" id="name" placeholder="Your Name" data-rule="minlen:4" required />
                                 <div class="validation"></div>
                             </div>
                             <div class="form-group">
@@ -530,6 +536,7 @@
     <script type="text/javascript" src="js/carosel.js"></script>
     <script src="vendor/popper/popper.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/email.js"></script>
 
     <script type="text/javascript">
       $(document).ready(function(e) {
