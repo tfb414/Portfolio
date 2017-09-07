@@ -108,5 +108,7 @@
 	.overlay{padding-top: 10px;}
 	.overlay button{position: relative; left: auto; margin-top: 10%; margin-bottom: 20px !important}
 	h2.project-title{margin: 0 0 5px 0}
+	#photo1{background-image: url('../img/photos/WindRiver-22_sized_small.jpg')}
+	#photo2{background-image: url('../img/photos/WindRiver-58_sized_small.jpg')}
 	
 } 

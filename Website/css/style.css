@@ -1037,3 +1037,15 @@ Parallax
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+/*
+carosel pictures
+*/
+
+#photo1{
+	background-image: url('../img/photos/WindRiver-22_sized.jpg');
+}
+
+#photo2{
+	background-image: url('../img/photos/WindRiver-58_sized.jpg')
+}
