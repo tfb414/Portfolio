@@ -541,7 +541,7 @@ img {
 /* Clients
 ---------------------------------*/
 .client-part{
-	background:url(../img/pw_maze_black.png) center center no-repeat;
+	background-color: black;
 	background-size:cover;
 	padding:55px 0;
 	text-align:center;
