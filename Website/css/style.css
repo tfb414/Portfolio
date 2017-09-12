@@ -497,6 +497,22 @@ color: #fff;
 	bottom: 30px;
 	margin: 15px;
 	padding: auto;
+	
+	
+}
+
+.project-display-overlay button {
+	color: black;
+	padding: 21px;
+	border: none;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	background: white;
+	color: black;
+	border: 2px solid black;
+	bottom: 30px;
+	margin: 15px;
+	padding: auto;
 	position: relative;
 	left: unset;
 	
